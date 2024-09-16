@@ -1,45 +1,45 @@
 <div class="form-wrapper">
     <div class="card">
       <h2>User Detail Form</h2>
-  
+
       <form (ngSubmit)="onSubmit()">
         <div class="p-fluid p-grid form-container">
           <!-- First Name and Last Name on one line -->
-          <div class="p-field p-col-12 p-md-6">
+          <div class="p-field p-col-12">
             <label for="firstname">First Name</label>
             <input pInputText id="firstname" [(ngModel)]="firstName" name="firstName" type="text" required />
           </div>
-  
-          <div class="p-field p-col-12 p-md-6">
+
+          <div class="p-field p-col-12">
             <label for="lastname">Last Name</label>
             <input pInputText id="lastname" [(ngModel)]="lastName" name="lastName" type="text" required />
           </div>
-  
+
           <div class="p-field p-col-12">
             <label for="email">Email</label>
             <input pInputText id="email" [(ngModel)]="email" name="email" type="email" readonly />
           </div>
-  
+
           <div class="p-field p-col-12">
             <label for="organization">Organization</label>
             <input pInputText id="organization" [(ngModel)]="organization" name="organization" type="text" />
           </div>
-  
+
           <h3 class="p-col-12">Address</h3>
-  
-          <div class="p-field p-col-12">
+
+          <div id="address" class="p-field p-col-12">
             <label for="address">Address (Line 1, Line 2, Town, City)</label>
             <input pInputText id="addressLine1" [(ngModel)]="addressLine1" placeholder="Line 1" name="addressLine1" type="text" />
             <input pInputText id="addressLine2" [(ngModel)]="addressLine2" placeholder="Line 2" name="addressLine2" type="text" />
             <input pInputText id="town" [(ngModel)]="town" placeholder="Town" name="town" type="text" />
             <input pInputText id="city" [(ngModel)]="city" placeholder="City" name="city" type="text" />
           </div>
-  
-          <div class="p-field p-col-12 p-md-6">
+
+          <div class="p-field p-col-12">
             <label for="pin">Pin Code</label>
             <input pInputText id="pin" [(ngModel)]="pin" name="pin" type="text" />
           </div>
-  
+
           <div class="p-col-12">
             <p-button label="Submit" type="submit" class="p-button-rounded p-button-success"></p-button>
           </div>
@@ -47,4 +47,3 @@
       </form>
     </div>
   </div>
-  

@@ -131,7 +131,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 # Configuration for MySQL
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '12345'
+app.config['MYSQL_PASSWORD'] = '123'
 app.config['MYSQL_DB'] = 'aigrant'
  
 # JWT configuration
