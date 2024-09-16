@@ -1,0 +1,11 @@
+CREATE DATABASE aigrant;
+use aigrant;
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+select * from users;
+ALTER USER 'root'@'localhost' IDENTIFIED BY '123';

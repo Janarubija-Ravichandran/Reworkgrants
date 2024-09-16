@@ -1,0 +1,74 @@
+<div class="app-container">
+  <div class="header">
+    <span class="logo">
+      <img src="/assets/logoo.png" height="50px" width="120px" alt="logo" />
+    </span>
+    <div class="avatar-container">
+      <p-avatar
+        icon="pi pi-user"
+        styleClass="mr-2"
+        shape="circle"
+        (click)="toggleSidenav()"
+      ></p-avatar>
+    </div>
+  </div>
+  <div class="container">
+    <div
+      [ngClass]="{
+        'sidebar-expanded': isExpanded,
+        'sidebar-collapsed': !isExpanded
+      }"
+    >
+      <button
+        (click)="toggleSidebar()"
+        pButton
+        icon="pi pi-bars"
+        class="toggle-button"
+      ></button>
+
+      <ul class="sidebar-menu">
+        <li *ngFor="let item of menuItems" (click)="navigateTo(item.router)">
+          <i [ngClass]="item.icon"></i>
+          <span *ngIf="isExpanded">{{ item.label }}</span>
+        </li>
+      </ul>
+
+      <div class="card">
+        <div style="position: absolute; bottom: 80px;color:rgb(9, 71, 35)">
+
+          <!-- Overlay Panel for Logout Button -->
+          <p-overlayPanel #op>
+            <button
+              pButton
+              type="button"
+              label="Logout"
+              class="p-button-danger"
+              (click)="logout()"
+            ></button>
+          </p-overlayPanel>
+          <!-- Avatar Button -->
+          <p-avatar
+          icon="pi pi-spin pi-cog"
+                      size="large"
+                      ngmask="true"
+                      direction="up"
+            shape="circle"
+            ngstyle="cursor: pointer;"
+            (click)="op.toggle($event)"
+          ></p-avatar>
+
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2024 Pozent Project</p>
+  </div>
+</div>

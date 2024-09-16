@@ -1,0 +1,296 @@
+/* .app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  height: 60px;
+  background-color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  color: white;
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 60px;
+  width: 250px;
+  height: calc(100vh - 60px);
+  background-color: #282c34;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+}
+
+.sidebar .toggle-btn {
+  position: absolute;
+  top: 10px;
+  right: -15px;
+  background-color: #282c34;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.sidebar .menu-items {
+  list-style: none;
+  padding: 20px;
+}
+
+.sidebar .menu-items li {
+  margin: 20px 0;
+}
+
+.content {
+  margin-left: 250px;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed + .content {
+  margin-left: 60px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+  }
+
+  .content {
+    margin-left: 60px;
+  }
+}
+.container {
+  display: flex;
+  background-color: #282c34;
+}
+
+.sidebar-expanded {
+  width: 250px;
+  transition: width 0.3s;
+}
+
+.sidebar-collapsed {
+  width: 70px;
+  transition: width 0.3s;
+}
+
+.sidebar-menu {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.sidebar-menu li i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.sidebar-menu li span {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.toggle-button {
+  margin-bottom: 10px;
+} */
+/* .app-container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar-expanded {
+  width: 250px;
+  transition: width 0.3s;
+}
+
+.sidebar-collapsed {
+  width: 70px;
+  transition: width 0.3s;
+}
+
+.main-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #111010;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.footer {
+  padding: 10px;
+  background-color: #0a0a0a;
+  text-align: center;
+  color: wheat;
+}
+
+.toggle-button {
+  margin-bottom: 10px;
+}
+
+.sidebar-menu {
+  list-style-type: none;
+  padding: 0;
+  color: #111010;
+}
+
+.sidebar-menu li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.sidebar-menu li i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+*{
+  color: black;
+} */
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: black;
+  color: white;
+}
+
+/* App Container */
+.app-container {
+  display: flex;
+  height: 100%;
+  background-color: black;
+  color: white;
+}
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: black;
+  color: white;
+}
+.sidebar-menu li {
+  background-color: red; /* Temporary color for debugging */
+}
+/* Sidebar Styles */
+p-sidebar {
+  background-color: #111213;
+  color: white;
+}
+
+.sidebar-expanded {
+  width: 250px;
+  transition: width 0.3s;
+}
+
+.sidebar-collapsed {
+  width: 70px;
+  transition: width 0.3s;
+}
+
+.sidebar-menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: white; /* Ensure text color is white */
+}
+
+.sidebar-menu li i {
+  font-size: 20px;
+  margin-right: 10px;
+  color: white; /* Ensure icon color is visible */
+}
+
+.sidebar-menu li span {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Header Styles */
+.header {
+  height: 60px;
+  background-color: #111010; /* Dark background for header */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.header .logo img {
+  height: 50px;
+  width: 120px;
+}
+
+
+/* Main Content Styles */
+.main-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: rgb(228, 218, 218); /* Background for main content */
+  color: white; /* Ensure text color is white */
+}
+
+/* Footer Styles */
+.footer {
+  padding: 10px;
+  background-color: #0a0a0a; /* Dark background for footer */
+  text-align: center;
+  color: white; /* Ensure text color is white */
+}
+
+/* Toggle Button */
+.toggle-button {
+  margin-bottom: 10px;
+}

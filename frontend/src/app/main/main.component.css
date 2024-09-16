@@ -1,0 +1,144 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  background-color: #056e70;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer {
+  background-color: #055c5e;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  padding-left: 7px;
+  padding-top: 5px;
+  padding-bottom: 2px;
+  justify-content: left;
+  padding: 10px;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 60px;
+  width: 250px;
+  height: calc(100vh - 60px);
+  background-color: #16181d;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+}
+
+.sidebar .toggle-btn {
+  position: absolute;
+  top: 10px;
+  right: -15px;
+  background-color: #0c0d0f;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.sidebar .menu-items {
+  list-style: none;
+  padding: 20px;
+}
+
+.sidebar .menu-items li {
+  margin: 20px 0;
+}
+
+.content {
+  margin-left: 250px;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+
+
+.sidebar.collapsed + .content {
+  margin-left: 60px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+  }
+
+  .content {
+    margin-left: 60px;
+  }
+}
+.container {
+  display: flex;
+  background-color: #f1f2f3;
+}
+
+.sidebar-expanded {
+  width: 150px;
+  transition: width 0.3s;
+  padding: 10px;
+
+}
+
+.sidebar-collapsed {
+  width: 60px;
+  transition: width 0.3s;
+  padding: 10px;
+
+}
+
+.sidebar-menu {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.sidebar-menu li i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.sidebar-menu li span {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.toggle-button {
+  margin-bottom: 10px;
+}
+.main-content {
+  flex-grow: 1;
+  /* padding: 20px; */
+  background-color: #a9afaf;
+  height: 850PX;
+}
+
+
+
+.avatar-sd {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+ .p-speedDial{
+height: 100px;
+color: #000;
+ }
+

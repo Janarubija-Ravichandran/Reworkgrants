@@ -1,0 +1,320 @@
+<!-- <ngx-spinner
+  [fullScreen]="true"
+  size="medium"
+  type="ball-clip-rotate-multiple"
+  color="white"
+  bdColor="rgba(0, 0, 0, 0.8)"
+>
+  <p style="color: white">Processing...</p>
+</ngx-spinner> -->
+<ngx-spinner
+  [fullScreen]="true"
+  size="medium"
+  type="ball-clip-rotate-multiple"
+  color="black"
+  bdColor="rgba(255, 255, 255, 1)"
+>
+  <p style="color: black">Processing...</p>
+</ngx-spinner>
+
+<div class="app-container">
+  <div class="header">
+    <span class="logo">
+      <img src="/assets/logoo.png" height="50px" width="120px" alt="logo" />
+    </span>
+    <!-- <h1 class="pozpro">Grant Writing</h1> -->
+
+    <div class="avatar-container">
+      <span type="button">
+        <!-- <mat-icon>account_circle</mat-icon> -->
+        <p-avatar
+          icon="pi pi-user"
+          styleClass="mr-2"
+          shape="circle"
+          (click)="toggleSidenav()"
+        ></p-avatar>
+      </span>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="right-panel">
+      <div *ngIf="brdContent">
+        <h3 class="output-title">Generated Cover Letter</h3>
+
+        <!-- Toggle Edit/Save Button -->
+        <!-- <button (click)="toggleEdit()">
+  <i>{{ isEditing ? <i class="pi pi-pencil"></i> : <i class="pi pi-save"></i> }}</i>
+</button> -->
+        <div class="butt">
+          <!-- Edit/Save Button with conditional class -->
+          <p-button
+            severity="help "
+            (click)="toggleEdit()"
+            pTooltip="Edit/Save"
+            tooltipPosition="bottom"
+            [outlined]="true"
+          >
+            <i [ngClass]="isEditing ? 'pi pi-save' : 'pi pi-pencil'"></i>
+          </p-button>
+
+          <!-- Download button, disabled during editing -->
+          <!-- <p-button
+            severity="help "
+            (click)="downloadGW()"
+            [disabled]="isEditing"
+            pTooltip="Download"
+            tooltipPosition="bottom"
+            [outlined]="true"
+          >
+            <i class="pi pi-download"></i>
+          </p-button>
+          <button
+            pButton
+            type="button"
+            label="Download File"
+            icon="pi pi-download"
+            (click)="openDownloadDialog()"
+          ></button> -->
+          <!-- PrimeNG Button to Open Download Dialog -->
+          <p-button
+            severity="help "
+            (click)="openDownloadDialog()"
+            [disabled]="isEditing"
+            pTooltip="Download"
+            tooltipPosition="bottom"
+            [outlined]="true"
+          >
+            <i class="pi pi-download"></i>
+          </p-button>
+
+          <!-- PrimeNG Dialog for entering the file name -->
+          <p-dialog
+            header="Enter File Name"
+            [(visible)]="displayDialog"
+            [modal]="true"
+            [closable]="false"
+            [responsive]="true"
+            [style]="{ width: '300px' }"
+          >
+            <div class="p-fluid">
+              <div class="p-field">
+                <label for="fileName">File Name</label>
+                <input
+                  id="fileName"
+                  pInputText
+                  [(ngModel)]="fileName"
+                  placeholder="Enter file name"
+                />
+              </div>
+            </div>
+            <p-footer style="display: flex; gap: 10px">
+              <button
+                pButton
+                label="Download"
+                icon="pi pi-check"
+                (click)="downloadGW()"
+              ></button>
+              <button
+                pButton
+                label="Cancel"
+                icon="pi pi-times"
+                (click)="onCancel()"
+              ></button>
+            </p-footer>
+          </p-dialog>
+        </div>
+        <!-- Textarea for editing content -->
+        <textarea
+          matInput
+          rows="40"
+          class="brd-textarea"
+          *ngIf="isEditing"
+          [(ngModel)]="editableContent"
+        ></textarea>
+
+        <!-- Disabled textarea for non-editable mode -->
+        <textarea
+          matInput
+          rows="40"
+          class="brd-textarea"
+          [value]="brdContent"
+          disabled
+          *ngIf="!isEditing"
+        ></textarea>
+      </div>
+
+      <div *ngIf="!brdContent" class="centered-message">
+        <div>
+          <h2>Welcome to Grant Writing</h2>
+          <p>
+            <strong>Upload the Government Scheme Document:</strong> Please
+            upload the document for the government scheme from which you are
+            seeking funding.
+          </p>
+          <p>
+            <strong>Upload Your Idea Document:</strong>Next, upload the document
+            detailing your proposal or idea for claiming funds under this
+            scheme.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="left-panel">
+      <form [formGroup]="brdForm" (ngSubmit)="generateGW()" class="brd-form">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Upload Files</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="upload-section">
+              <h3>Government Scheme Document</h3>
+              <div
+                class="upload-area"
+                (dragover)="onDragOver($event)"
+                (drop)="onDrop($event)"
+              >
+                <p-button
+                  icon="pi pi-upload"
+                  pTooltip="Upload your Government Scheme document"
+                  tooltipPosition="bottom"
+                  [style]="{ cursor: 'pointer' }"
+                  aria-label="Upload"
+                  [rounded]="true"
+                  (click)="schemeFileInput.click()"
+                  severity="success"
+                >
+                </p-button>
+
+                <input
+                  #schemeFileInput
+                  type="file"
+                  (change)="onSchemeFileChange($event)"
+                  accept=".pdf"
+                  style="display: none"
+                />
+                <div *ngIf="schemeFile" class="uploaded-file">
+                  <p>
+                    {{ schemeFile.file.name }} - Uploaded at
+                    {{ schemeFile.uploadedTime | date : "shortTime" }}
+                  </p>
+                  <button
+                    mat-icon-button
+                    color="warn"
+                    (click)="removeSchemeFile()"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="upload-section">
+              <h3>User Idea Document</h3>
+              <div
+                class="upload-area"
+                (dragover)="onDragOver($event)"
+                (drop)="onDrop($event)"
+              >
+                <p-button
+                  icon="pi pi-upload"
+                  [rounded]="true"
+                  pTooltip="Upload your idea document"
+                  tooltipPosition="bottom"
+                  [style]="{ cursor: 'pointer' }"
+                  aria-label="Upload"
+                  (click)="ideaFileInput.click()"
+                  severity="success"
+                >
+                </p-button>
+
+                <input
+                  #ideaFileInput
+                  type="file"
+                  (change)="onIdeaFileChange($event)"
+                  accept=".pdf"
+                  style="display: none"
+                />
+
+                <div *ngIf="ideaFile" class="uploaded-file">
+                  <p>
+                    {{ ideaFile.file.name }} - Uploaded at
+                    {{ ideaFile.uploadedTime | date : "shortTime" }}
+                  </p>
+                  <button
+                    mat-icon-button
+                    color="warn"
+                    (click)="removeIdeaFile()"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="progress > 0 && progress < 100">
+              <mat-progress-bar
+                mode="determinate"
+                [value]="progress"
+              ></mat-progress-bar>
+              <p>Uploading... {{ progress }}%</p>
+            </div>
+
+            <br /><br />
+            <div class="language-selection-container">
+              <h2 class="heading">Select Language</h2>
+              <div class="form-field">
+                <label for="language" class="language-label"
+                  >Choose your language:</label
+                >
+                <p-dropdown
+                  [options]="languages"
+                  formControlName="language"
+                  placeholder="Select a Language"
+                  class="full-width"
+                ></p-dropdown>
+              </div>
+            </div>
+
+            <ngx-spinner
+              bdColor="rgba(0,0,0,0.8)"
+              size="medium"
+              color="#fff"
+              type="ball-spin-clockwise"
+            ></ngx-spinner>
+
+            <div class="proces">
+              <button
+                pButton
+                pRipple
+                label="Process"
+                (click)="processFiles()"
+                class="process"
+                [disabled]="!schemeFile || !ideaFile"
+              ></button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </form>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p class="copyright">&copy; 2024 Pozent Project</p>
+  </div>
+
+  <p-sidebar [(visible)]="isSidenavOpen" position="right" class="sidenav">
+    <h3>{{ email }}</h3>
+    <!-- PrimeNG Button for Logout -->
+    <button
+      pButton
+      class="LOG"
+      label="Logout"
+      pRipple
+      (click)="logout()"
+    ></button>
+
+    <!-- Toast component to show top-left messages -->
+    <p-toast key="tl" position="top-left"></p-toast>
+  </p-sidebar>
+</div>

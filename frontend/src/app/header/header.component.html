@@ -1,0 +1,77 @@
+<p>header works!</p>
+<div class="app-container">
+  <!-- Sidebar Section -->
+  <p-sidebar [ngClass]="{'sidebar-expanded': isExpanded, 'sidebar-collapsed': !isExpanded}">
+    <button (click)="toggleSidebar()" pButton icon="pi pi-bars" class="toggle-button" style="color: white;">
+      Toggle
+    </button>
+
+    <ul class="sidebar-menu">
+      <li *ngFor="let item of menuItems">
+        <i [ngClass]="item.icon"></i>
+        <span *ngIf="isExpanded">{{ item.label }}</span>
+      </li>
+    </ul>
+  </p-sidebar>
+
+  <!-- Main Content -->
+  <div class="main-container">
+    <!-- Header Section -->
+    <div class="header">
+      <span class="logo">
+        <img src="/assets/logoo.png" height="50px" width="120px" alt="logo" />
+      </span>
+      <div class="avatar-container">
+        <p-avatar icon="pi pi-user" styleClass="mr-2" shape="circle" (click)="toggleSidebar()"></p-avatar>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+      <p>&copy; 2024 Pozent Project</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="app-container">
+  <div class="header">
+    <span class="logo">
+      <img src="/assets/logoo.png" height="50px" width="120px" alt="logo" />
+    </span>
+    <div class="avatar-container">
+      <p-avatar
+        icon="pi pi-user"
+        styleClass="mr-2"
+        shape="circle"
+        (click)="toggleSidenav()"
+      ></p-avatar>
+    </div>
+  </div>
+  <div class="container">
+    <div [ngClass]="{'sidebar-expanded': isExpanded, 'sidebar-collapsed': !isExpanded}">
+      <button (click)="toggleSidebar()" pButton icon="pi pi-bars" class="toggle-button"></button>
+
+      <ul class="sidebar-menu">
+        <li *ngFor="let item of menuItems">
+          <i [ngClass]="item.icon"></i>
+          <span *ngIf="isExpanded">{{ item.label }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+<app-login> </app-login>   </div>
+  </div>
+
+
+
+
+  <div class="footer">
+    <p>&copy; 2024 Pozent Project</p>
+  </div> -->

@@ -1,0 +1,43 @@
+<div class="split-screen">
+
+  <h1 class="txt">Ai Powered Grant's</h1>
+<!-- <div>
+    <p class="txt">
+      Enhance your grant's potential with our AI-driven tool. We create custom
+      cover letters based on your uploaded documents, helping your ideas shine
+      and match funding opportunities perfectly.
+    </p>
+
+    <br />
+  </div> -->
+  <div class="login-container">
+    <h2>Login</h2>
+    <input
+      type="text"
+      placeholder="Email"
+      pInputText
+      [(ngModel)]="email"
+      class="user"
+    />
+    <p-password
+    class="pass"
+    [(ngModel)]="password"
+    placeholder="Password"
+    [toggleMask]="true"
+    [feedback]="false"
+  ></p-password>
+
+    <div class="buttons">
+      <button mat-raised-button label="Submit" (click)="login()">Submit</button>
+      <p-toast key="tl"></p-toast>
+      <p-toast key="t2"></p-toast>
+      <p-toast key="t3"></p-toast>
+
+
+
+      <button mat-button label="Register" (click)="navigateToRegister()">
+        Register
+      </button>
+    </div>
+  </div>
+</div>

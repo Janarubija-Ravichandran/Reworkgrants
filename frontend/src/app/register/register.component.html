@@ -1,0 +1,49 @@
+<div class="split-screen">
+  <div class="login-container">
+    <h2>Register</h2>
+
+    <!-- Username input -->
+    <input
+      pInputText
+      id="username"
+      placeholder="Username"
+      aria-describedby="username-help"
+      [(ngModel)]="username"
+      (ngModelChange)="clearError()"
+    />
+    <p *ngIf="usernameError" class="error-message">{{ usernameError }}</p>
+
+    <!-- Email input -->
+    <input
+      pInputText
+      id="email"
+      placeholder="Email"
+      aria-describedby="email-help"
+      [(ngModel)]="email"
+      (ngModelChange)="clearError()"
+    />
+    <p *ngIf="emailError" class="error-message">{{ emailError }}</p>
+
+    <!-- Password input -->
+    <p-password
+      class="pass"
+      placeholder="Password"
+      [(ngModel)]="password"
+      [toggleMask]="true"
+      (ngModelChange)="clearError()"
+    ></p-password>
+    <p *ngIf="passwordError" class="error-message">{{ passwordError }}</p>
+
+    <!-- Buttons -->
+    <button mat-raised-button (click)="register()">Register</button>
+    <button mat-button (click)="navigateToLogin()">Login</button>
+  </div>
+</div>
+<p-toast key="tl"></p-toast>
+<p-toast key="t2"></p-toast>
+<style>
+  .error-message {
+    color: red;
+    font-size: 12px;
+  }
+</style>

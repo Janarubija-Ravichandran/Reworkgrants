@@ -1,0 +1,21 @@
+div
+{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    width: 100%;
+    /* background-color: #f4f4f4;  */
+    padding: 20px; /* Padding for mobile responsiveness */
+    box-sizing: border-box; /* Ensures padding doesn't add to width */
+      /* background-image: url("/assets/r.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat; */
+      /* overflow-y: auto; */
+      /* position: relative;*/
+      background-color: #ffffff;
+
+}
