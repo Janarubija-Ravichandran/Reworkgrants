@@ -12,11 +12,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from dotenv import load_dotenv
- 
 load_dotenv()
 
-app = Flask(__name__)
-
+app = Flask(__name__) 
 openai_api_key = "sk-proj-gArJfrZUnA2PVYU86OW0T3BlbkFJgEtCw5413cdv5OHGE7iW"
 os.environ["OPENAI_API_KEY"] = openai_api_key
 
@@ -133,7 +131,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 # Configuration for MySQL
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '123'
+app.config['MYSQL_PASSWORD'] = '12345'
 app.config['MYSQL_DB'] = 'aigrant'
  
 # JWT configuration

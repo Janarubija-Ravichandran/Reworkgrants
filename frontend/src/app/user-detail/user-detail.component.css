@@ -1,0 +1,78 @@
+/* Full-screen container without scrolling */
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    /* background-image: url('path/to/your/background.jpg'); Add your background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Fix background image */
+    overflow: hidden;
+  }
+  
+  .card {
+    width: 90%; /* Smaller width on mobile */
+    max-width: 700px; /* Limit max width on larger screens */
+    background-color: rgba(255, 255, 255, 0.85); /* Slight transparency */
+    border-radius: 8px;
+    padding: 2rem; /* Added top and bottom padding */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .p-field {
+    margin-bottom: 1rem; /* Space between fields */
+  }
+  
+  input {
+    width: 100%;
+  }
+  
+  .p-field {
+    margin-bottom: 0.5rem; /* Less space between inputs */
+  }
+  
+  .p-grid .p-col-12 {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .p-grid .p-col-12.p-md-6 {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+
+  }
+  
+  /* Ensures the input fields in the same row are aligned properly */
+  .p-field.p-col-12.p-md-6 {
+    flex: 1;
+    margin-right: 1rem;
+  }
+  
+  .p-field.p-col-12.p-md-6:last-child {
+    margin-right: 0;
+  }
+  
+  p-button {
+    display: block;
+    margin: 1rem auto;
+  }
+  
+  @media (max-width: 768px) {
+    .card {
+      padding: 1rem;
+      max-width: 90%; /* Take more width on small screens */
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+  

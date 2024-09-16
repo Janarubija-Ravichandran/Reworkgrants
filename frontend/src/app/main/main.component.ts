@@ -12,7 +12,8 @@ import { MenuItem, MessageService } from 'primeng/api';
 export class MainComponent {
   isSidenavOpen: boolean = false;
   items: any[] = [];
-
+  email: string | null = '';
+  token: string | null = '';
   constructor(
     public router: Router,
     private messageService: MessageService
@@ -22,6 +23,14 @@ export class MainComponent {
   }
 
   ngOnInit() {
+       // Get email and token from localStorage
+       this.email = localStorage.getItem('email');
+       this.token = localStorage.getItem('token');
+   
+       // If email or token is missing, redirect to login page
+       if (!this.email || !this.token) {
+         this.router.navigate(['/login']);
+       }
     this.items = [
       {
         label: 'Logout',
