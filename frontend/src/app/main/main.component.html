@@ -3,14 +3,14 @@
     <span class="logo">
       <img src="/assets/logoo.png" height="50px" width="120px" alt="logo" />
     </span>
-    <div class="avatar-container">
+    <!-- <div class="avatar-container">
       <p-avatar
         icon="pi pi-user"
         styleClass="mr-2"
         shape="circle"
         (click)="toggleSidenav()"
       ></p-avatar>
-    </div>
+    </div> -->
   </div>
   <div class="container">
     <div
@@ -27,7 +27,9 @@
       ></button>
 
       <ul class="sidebar-menu">
-        <li *ngFor="let item of menuItems" (click)="navigateTo(item.router)">
+        <li *ngFor="let item of menuItems" (click)="navigateTo(item.router)"
+             [ngClass]="{'active': isActive(item.router)}">
+
           <i [ngClass]="item.icon"></i>
           <span *ngIf="isExpanded">{{ item.label }}</span>
         </li>

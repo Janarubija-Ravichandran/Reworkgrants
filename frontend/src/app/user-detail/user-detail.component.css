@@ -3,24 +3,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  min-height: 100%; /* Ensure full viewport height */
   background-image: url("/assets/regis.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  padding: 20px; /* Add padding to avoid overlap with header/footer */
+  box-sizing: border-box; /* Include padding in the height calculation */
 }
 
 .card {
   padding: 20px;
-  width: 90%;
+  width: 100%;
   max-width: 700px;
   background-color: rgba(255, 255, 255, 0.55);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Ensure padding is included in the total width */
 }
 
-h2,h3 {
+h2, h3 {
   text-align: center;
   margin-bottom: 20px;
 }
@@ -66,5 +69,11 @@ p-button {
   .p-field label {
     margin-bottom: 5px;
     text-align: left;
+  }
+
+  /* Adjust card width and padding for small screens */
+  .card {
+    padding: 10px;
+    width: 100%;
   }
 }

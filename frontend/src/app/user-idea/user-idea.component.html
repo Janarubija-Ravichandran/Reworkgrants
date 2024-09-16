@@ -1,1 +1,82 @@
-<p>user-idea works!</p>
+<div class="form-wrapper">
+  <div class="card">
+    <h2>User Idea Form</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="p-fluid p-grid form-container">
+        <!-- Project Name Field -->
+        <div class="p-field fn">
+          <label for="projectName">Project Name:</label>
+          <input
+            pInputText
+            id="projectName"
+            [(ngModel)]="projectName"
+            name="projectName"
+            type="text"
+            required
+          />
+        </div>
+
+        <!-- Project Summary Field -->
+        <div class="p-field fn">
+          <label for="projectSummary">Project Summary:</label>
+          <input
+            pInputText
+            id="projectSummary"
+            [(ngModel)]="projectSummary"
+            name="projectSummary"
+            type="text"
+            required
+          />
+        </div>
+
+        <!-- Budget Details Field -->
+        <div class="p-field fn">
+          <label for="budgetDetails">Budget Details:</label>
+          <input
+            pInputText
+            id="budgetDetails"
+            [(ngModel)]="budgetDetails"
+            name="budgetDetails"
+            type="text"
+            required
+          />
+        </div>
+
+        <!-- Time Field -->
+        <div class="p-field fn">
+          <label for="time">Time:</label>
+          <input
+            pInputText
+            id="time"
+            [(ngModel)]="time"
+            name="time"
+            type="text"
+            required
+          />
+        </div>
+
+        <!-- Email Field (Fetched from localStorage) -->
+        <div class="p-field fn">
+          <label for="email">Email:</label>
+          <input
+            pInputText
+            id="email"
+            [(ngModel)]="email"
+            name="email"
+            type="email"
+            readonly
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <div class="p-col-12">
+          <p-button
+            label="Submit"
+            type="submit"
+            class="p-button-rounded p-button-success"
+          ></p-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

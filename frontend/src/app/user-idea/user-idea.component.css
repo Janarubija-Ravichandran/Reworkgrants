@@ -1,0 +1,87 @@
+/* Full-screen container */
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%; /* Ensure full viewport height */
+  background-image: url("/assets/regis.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding: 20px; /* Add padding to avoid overlap with header/footer */
+  box-sizing: border-box; /* Include padding in the height calculation */
+}
+
+.card {
+  padding: 20px;
+  width: 100%;
+  max-width: 700px;
+  background-color: rgba(255, 255, 255, 0.55);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Ensure padding is included in the total width */
+}
+
+h2, h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.p-field {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.p-field label {
+  flex: 1;
+  text-align: left;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.p-field input {
+  flex: 2;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.fn {
+  display: flex;
+  align-items: center;
+}
+
+p-button {
+  display: block;
+  margin: 20px auto;
+}
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+}
+
+.p-field input.ng-touched.ng-invalid {
+  border-color: red;
+}
+
+@media (max-width: 768px) {
+  .p-field {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .p-field label {
+    margin-bottom: 5px;
+    text-align: left;
+  }
+
+  /* Adjust card width and padding for small screens */
+  .card {
+    padding: 10px;
+    width: 100%;
+  }
+}

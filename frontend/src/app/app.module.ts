@@ -33,6 +33,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserIdeaComponent } from './user-idea/user-idea.component';
 import { GrantsComponent } from './grants/grants.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     UserDetailComponent,
     UserIdeaComponent,
     GrantsComponent,
+    LayoutComponent,
   ],
   imports: [
     OverlayPanelModule,
