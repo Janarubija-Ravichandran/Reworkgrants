@@ -55,7 +55,7 @@ epasserr(): void {
             this.success();
 
             setTimeout(() => {
-              this.router.navigate(['/file']);
+              this.router.navigate(['/user-detail']);
             }, 500);
              } else {
             this.logerr();

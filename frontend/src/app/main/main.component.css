@@ -61,7 +61,7 @@
 }
 /* Example styling for the active menu item */
 .sidebar-menu li.active {
-  background-color: #077771f5; /* Highlight color */
+  background-color: #078079f5; /* Highlight color */
   font-weight: bold; /* Optional: make text bold */
   color:#fff;
   border-radius: 20px;

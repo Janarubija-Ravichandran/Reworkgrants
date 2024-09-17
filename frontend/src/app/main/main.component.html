@@ -1,7 +1,7 @@
 <div class="app-container">
   <div class="header">
     <span class="logo">
-      <img src="/assets/logoo.png" height="50px" width="120px" alt="logo" />
+      <img src="/assets/logoo.png" height="50px" width="120px" alt="logo"  pTooltip=" Ai Powered Grant's"/>
     </span>
     <!-- <div class="avatar-container">
       <p-avatar
@@ -27,13 +27,19 @@
       ></button>
 
       <ul class="sidebar-menu">
-        <li *ngFor="let item of menuItems" (click)="navigateTo(item.router)"
-             [ngClass]="{'active': isActive(item.router)}">
+        <li *ngFor="let item of menuItems"
+            [routerLink]="item.router"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            [ngClass]="{'active': isActive(item.router)}"
+            pTooltip="{{item.pTooltip}}"
+            tooltipPosition="right">
 
           <i [ngClass]="item.icon"></i>
           <span *ngIf="isExpanded">{{ item.label }}</span>
         </li>
       </ul>
+
 
       <div class="card">
         <div style="position: absolute; bottom: 80px;color:rgb(9, 71, 35)">
@@ -50,7 +56,8 @@
           </p-overlayPanel>
           <!-- Avatar Button -->
           <p-avatar
-          icon="pi pi-spin pi-cog"
+          icon="pi pi-sign-out"
+          pTooltip="Logout"
                       size="large"
                       ngmask="true"
                       direction="up"

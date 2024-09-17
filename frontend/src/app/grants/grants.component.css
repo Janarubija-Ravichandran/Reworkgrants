@@ -1,0 +1,33 @@
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-image: url("/assets/regis.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card {
+  padding: 20px;
+  width: 90%;
+  max-width: 800px;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.p-field {
+  margin-bottom: 15px;
+}
+
+.p-button-outlined {
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .p-field {
+    flex-direction: column;
+  }
+}

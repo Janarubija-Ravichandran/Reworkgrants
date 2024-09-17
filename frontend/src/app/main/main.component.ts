@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { filter } from 'rxjs/operators';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-main',
@@ -63,14 +64,15 @@ export class MainComponent {
   }
 
 
-  isExpanded = true; // Start with sidebar expanded
+  isExpanded = false; // Start with sidebar expanded
 
   // Example menu items
 
   menuItems = [
-      { label: 'User Detail', icon: 'pi pi-user', router: '/user-detail' },
-      { label: 'User Idea', icon: 'pi pi-lightbulb', router: '/user-idea' },
-      { label: 'Grants', icon: 'pi pi-file-edit', router: '/grants' },
+      { label: 'User Detail', icon: 'pi pi-user', router: '/user-detail', pTooltip:"User Details"
+      },
+      { label: 'User Idea', icon: 'pi pi-lightbulb', router: '/user-idea' ,pTooltip:"User Idea"},
+      { label: 'Grants', icon: 'pi pi-file-edit', router: '/grants' ,pTooltip:"Generate Grant "},
 
     // { label: 'Messages', icon: 'pi pi-envelope', router: '/header' }
   ];

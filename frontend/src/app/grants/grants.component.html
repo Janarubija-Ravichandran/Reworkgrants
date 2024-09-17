@@ -1,1 +1,65 @@
-<p>grants works!</p>
+<div class="form-wrapper">
+  <div class="card">
+    <h2>Grant Application Form</h2>
+    <form [formGroup]="grantForm" (ngSubmit)="onSubmit()">
+      <div class="p-fluid p-grid form-container">
+
+        <!-- Upload Government Scheme Document -->
+        <div class="p-field">
+          <label for="govScheme">Upload Government Scheme Document:</label>
+          <p-fileUpload
+            id="govScheme"
+            name="govScheme"
+            mode="basic"
+            accept=".pdf"
+            chooseLabel="Choose File"
+            uploadLabel="Upload"
+            cancelLabel="Cancel"
+            [auto]="true"
+            (onUpload)="onFileUpload($event)">
+          </p-fileUpload>
+        </div>
+
+        <!-- Select or Enter User Idea -->
+        <div class="p-field">
+          <label for="userIdea">Select or Enter User Idea:</label>
+          <p-dropdown
+            id="userIdea"
+            [options]="userIdeas"
+            formControlName="userIdea"
+            placeholder="Select User Idea"
+            (onChange)="onUserIdeaChange($event)">
+          </p-dropdown>
+          <p-button label="Enter New Idea" (click)="navigateToUserIdea()" class="p-button-outlined p-button-secondary"></p-button>
+        </div>
+
+        <!-- User Form Fields -->
+        <div class="p-field">
+          <label for="userForm">User Form:</label>
+          <input pInputText id="userForm" formControlName="userForm" type="text" placeholder="Enter User Form Details" />
+        </div>
+
+        <!-- Select Language -->
+        <div class="p-field">
+          <label for="language">Select Language:</label>
+          <p-dropdown
+            id="language"
+            [options]="languages"
+            formControlName="language"
+            placeholder="Select Language">
+          </p-dropdown>
+        </div>
+
+        <!-- Generate Button -->
+        <div class="p-col-12">
+          <p-button
+            label="Start Generate"
+            type="submit"
+            class="p-button-rounded p-button-success"
+            [disabled]="!grantForm.valid">
+          </p-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
