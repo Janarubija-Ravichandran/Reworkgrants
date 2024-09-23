@@ -1,66 +1,98 @@
-<div class="form-wrapper">
-  <div class="card">
-    <h2>User Detail Form</h2>
-    <form (ngSubmit)="onSubmit()">
-      <div class="p-fluid p-grid form-container">
 
-        <!-- First Name Field -->
-        <div class="p-field fn">
-          <label for="firstname">First Name:</label>
-          <input pInputText id="firstname" [(ngModel)]="firstName" name="firstName" type="text" required />
-        </div>
+    <div class="form-wrapper">
+      <div class="card">
+        <h2>User Details</h2>
+        <form  *ngIf="userExists; else noUserTemplate" class="user-details">
+          <div class="p-fluid p-grid form-container">
+            <!-- Project Name Field -->
+            <!-- <div class="p-field fn">
+              <label for="projectName">Project Name:</label>
+              <input
+                pInputText
+                id="projectName"
+                formControlName="projectName"
+                name="projectName"
+                type="text"
+                required
+              />
+            </div> -->
 
-        <!-- Last Name Field -->
-        <div class="p-field fn">
-          <label for="lastname">Last Name:</label>
-          <input pInputText id="lastname" [(ngModel)]="lastName" name="lastName" type="text" required />
-        </div>
+            <!-- Project Summary Field -->
+            <div class="p-field fn">
+              <label for="project-summary">Email:</label>
+              <p>{{user?.email}}</p>
+            </div>
 
-        <!-- Email Field -->
-        <div class="p-field fn">
-          <label for="email">Email:</label>
-          <input pInputText id="email" [(ngModel)]="email" name="email" type="email" readonly />
-        </div>
+            <!-- Budget Details Field -->
+            <div class="p-field fn">
+              <label for="budgetDetails">Name:</label>
+              <p>{{user?.name}}</p>
+            </div>
 
-        <!-- Organization Field -->
-        <div class="p-field fn">
-          <label for="organization">Organization:</label>
-          <input pInputText id="organization" [(ngModel)]="organization" name="organization" type="text" />
-        </div>
+            <!-- Time Field -->
+            <div class="p-field fn">
+              <label for="time">OrganizationName:</label>
+              <p> {{ user?.organizationName }}</p>
+            </div>
 
-        <!-- Address Fields -->
-        <h3>Address</h3>
-        <div class="p-field fn">
-          <label for="addressLine1">Address (Line 1):</label>
-          <input pInputText id="addressLine1" [(ngModel)]="addressLine1" placeholder="Line 1" name="addressLine1" type="text" />
-        </div>
+            <!-- Email Field (Fetched from localStorage) -->
+            <div class="p-field fn">
+              <label for="email">Address:</label>
+             <p>{{ user?.address }}</p>
+            </div>
+            <div class="p-field fn">
+              <label for="email">City:</label>
+             <p>{{ user?.city }}</p>
+            </div>
+            <div class="p-field fn">
+              <label for="email">State:</label>
+             <p>{{ user?.state }}</p>
+            </div>
 
-        <div class="p-field fn">
-          <label for="addressLine2">Address (Line 2):</label>
-          <input pInputText id="addressLine2" [(ngModel)]="addressLine2" placeholder="Line 2" name="addressLine2" type="text" />
-        </div>
-
-        <div class="p-field fn">
-          <label for="town">Town:</label>
-          <input pInputText id="town" [(ngModel)]="town" placeholder="Town" name="town" type="text" />
-        </div>
-
-        <div class="p-field fn">
-          <label for="city">City:</label>
-          <input pInputText id="city" [(ngModel)]="city" placeholder="City" name="city" type="text" />
-        </div>
-
-        <!-- Pin Code Field -->
-        <div class="p-field fn">
-          <label for="pin">Pin Code:</label>
-          <input pInputText id="pin" [(ngModel)]="pin" name="pin" type="text" />
-        </div>
-
-        <!-- Submit Button -->
-        <div class="p-col-12">
-          <p-button label="Submit" type="submit" class="p-button-rounded p-button-success"></p-button>
-        </div>
+            <!-- Submit Button -->
+            <div class="p-col-12">
+              <p-button
+                label="Submit"
+                type="submit"
+                class="p-button-rounded p-button-success"
+              ></p-button>
+            </div>
+          </div>
+        </form>
+        <ng-template #noUserTemplate>
+          <div *ngIf="message">{{ message }}</div>
+        </ng-template>  </div>
       </div>
-    </form>
-  </div>
-</div>
+    <!-- <div class="idea-form-container">
+      <h2>{{ editMode ? 'Edit Idea' : 'Add Idea' }}</h2>
+
+      <form [formGroup]="ideaForm" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="project-summary">Project Summary:</label>
+          <textarea id="project-summary" formControlName="project_summary"></textarea>
+        </div>
+
+        <div>
+          <label for="budget-details">Budget Details:</label>
+          <input id="budget-details" type="text" formControlName="budget_details" />
+        </div>
+
+        <div>
+          <label for="timeline">Timeline:</label>
+          <input id="timeline" type="text" formControlName="timeline" />
+        </div>
+
+        <button type="submit" [disabled]="!ideaForm.valid">{{ editMode ? 'Update Idea' : 'Add Idea' }}</button>
+      </form>
+
+      <div *ngIf="ideas.length">
+        <h3>Your Ideas:</h3>
+        <ul>
+          <li *ngFor="let idea of ideas">
+            {{ idea.project_summary }} - {{ idea.budget_details }} - {{ idea.timeline }}
+            <button (click)="editIdea(idea)">Edit</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+     -->

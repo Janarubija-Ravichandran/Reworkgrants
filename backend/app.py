@@ -1,3 +1,4 @@
+from asyncio import open_connection
 from flask import Flask, request, jsonify, send_file
 from langchain_community.document_loaders import PDFPlumberLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -7,13 +8,15 @@ from langchain_community.chat_models import ChatOpenAI
 from fpdf import FPDF
 from io import BytesIO
 import os
+import mysql.connector
 from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from dotenv import load_dotenv
+from datab import create_database_if_not_exists, add_user_details,retrieve_user_details,modify_user_details,add_idea,retrieve_ideas,modify_idea
 load_dotenv()
-
+create_database_if_not_exists()
 app = Flask(__name__) 
 openai_api_key = "sk-proj-gArJfrZUnA2PVYU86OW0T3BlbkFJgEtCw5413cdv5OHGE7iW"
 os.environ["OPENAI_API_KEY"] = openai_api_key
@@ -131,7 +134,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 # Configuration for MySQL
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '123'
+app.config['MYSQL_PASSWORD'] = 'root123'
 app.config['MYSQL_DB'] = 'aigrant'
  
 # JWT configuration
@@ -208,139 +211,120 @@ def login():
         print(f"Error: {e}")
         return jsonify({'message': 'Internal server error', 'error': str(e)}), 500
 
-@app.route("/generate-grant", methods=["POST"])
-def generate_grant():
-    data = request.form
-    client_file = request.files.get('client_file')
-    scheme_file = request.files.get('scheme_file')
-    language = data.get('language')
+@app.route('/add_user', methods=['POST'])
+def add_user():
+    data = request.json
+    email = data.get('email')
+    name = data.get('name')
+    organization_name = data.get('organization_name')
+    address = data.get('address')
+    city = data.get('city')
+    state = data.get('state')
+ 
+    add_user_details(email, name, organization_name, address, city, state)
+    return jsonify({"message": "User details added successfully!"}), 200
+ 
+# @app.route('/get_user', methods=['GET'])
+# def get_user():
+#     email = request.args.get('email')
+#     users = retrieve_user_details(email)
+#     if users:
+#         return jsonify({"users": users}), 200
+#     else:
+#         return jsonify({"message": "No users found."}), 404
 
-    if not client_file or not scheme_file:
-        return jsonify({"error": "Both client_file and scheme_file are required","status":"failure"}), 400
 
-    if not language:
-        return jsonify({"error": "Language is required","status":"failure"}), 400
 
-    client_summary, scheme_summary = summarize_pdfs(client_file.read(), scheme_file.read())
-    grant_proposal = generate_grant_proposal(client_summary, scheme_summary, language)
+@app.route('/get_user', methods=['GET'])
+def get_user():
+    email = request.args.get('email')
+    print(email)
+    if not email:
+        return jsonify({"message": "Email is required"}), 400  # Handle missing email
 
-    return jsonify({"proposal": grant_proposal, "language": language,"status":"success"}),200
+    users = retrieve_user_details(email)
+    if users:
+        return jsonify({"users": users}), 200
+    else:
+        return jsonify({"message": "No users found."}), 404
+@app.route('/add_idea', methods=['POST'])
+def add_idea_route():
+    data = request.json
+    
+    # Check if the data is a dictionary
+    if isinstance(data, dict):
+        project_summary = data.get('project_summary')
+        budget_details = data.get('budget_details')
+        timeline = data.get('timeline')
+        email = data.get('email')
+        
+        if not email:
+            return jsonify({"message": "Email is required"}), 400
+        
+        add_idea(project_summary, budget_details, timeline, email)
+        return jsonify({"message": "Idea added successfully!"}), 200
+    else:
+        return jsonify({"error": "Invalid data format. Expected a JSON object."}), 400
+@app.route('/modify_user', methods=['PUT'])
+def modify_user():
+    data = request.json
+    
+    # Check if the data is a dictionary
+    if isinstance(data, dict):
+        email = data.get('email')
+        if not email:
+            return jsonify({"message": "Email is required"}), 400
+        
+        # Filter out 'email' from the fields to update
+        updated_fields = {key: value for key, value in data.items() if key != 'email'}
+        
+        modify_user_details(email, **updated_fields)
+        return jsonify({"message": "User details updated successfully!"}), 200
+    else:
+        return jsonify({"error": "Invalid data format. Expected a JSON object."}), 400
 
-@app.route("/download-text", methods=["POST"])
-def download_text():
-    data = request.get_json()
-    grant_proposal = data['grant_proposal']
-    language = data.get('language')
-
-    text_file = create_text_file(grant_proposal)
-    return send_file(text_file, as_attachment=True, download_name=f"generated_grant_proposal_{language}.txt", mimetype="text/plain")
-
-if __name__ == "__main__":
+# @app.route('/modify_user', methods=['PUT'])
+# def modify_user():
+#     data = request.json
+#     email = data.get('email')
+#     updated_fields = {key: value for key, value in data.items() if key != 'email'}
+ 
+#     modify_user_details(email, **updated_fields)
+#     return jsonify({"message": "User details updated successfully!"}), 200
+ 
+# @app.route('/add_idea', methods=['POST'])
+# def add_idea_route():
+#     data = request.json
+#     project_summary = data.get('project_summary')
+#     budget_details = data.get('budget_details')
+#     timeline = data.get('timeline')
+#     email = data.get('email')
+ 
+#     add_idea(project_summary, budget_details, timeline, email)
+#     return jsonify({"message": "Idea added successfully!"}), 200
+ 
+@app.route('/get_ideas', methods=['GET'])
+def get_ideas():
+    email = request.args.get('email')
+    ideas = retrieve_ideas(email)
+    if ideas:
+        return jsonify({"ideas": ideas}), 200
+    else:
+        return jsonify({"message": "No ideas found."}), 404
+ 
+@app.route('/modify_idea', methods=['PUT'])
+def modify_idea_route():
+    data = request.json
+    idea_id = data.get('id')      
+    updated_fields = {key: value for key, value in data.items() if key != 'id'}
+ 
+    modify_idea(idea_id, **updated_fields)
+    return jsonify({"message": "Idea updated successfully!"}), 200
+if __name__ == '__main__':
+    create_database_if_not_exists()
     app.run(debug=True)
 
 
 
 
 
-
-
-
-
-# from flask import Flask, request, jsonify
-# from flask_mysqldb import MySQL
-# from werkzeug.security import generate_password_hash, check_password_hash
-# from flask_cors import CORS
-# from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
-# from dotenv import load_dotenv
-# import os
-
-# load_dotenv()
-
-# app = Flask(__name__)
-
-# # Configure CORS to allow requests from all origins
-# CORS(app, resources={r"/*": {"origins": "*"}})
-
-# # Configuration for MySQL
-# app.config['MYSQL_HOST'] = 'localhost'
-# app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = '123'
-# app.config['MYSQL_DB'] = 'aigrant'
-
-# # JWT configuration
-# app.config['JWT_SECRET_KEY'] = 'mndfnfdbfdmnfvsfdvmnfdbvhdfvvbfgnbv'  # Your secret key
-# jwt = JWTManager(app)
-
-# mysql = MySQL(app)
-
-# @app.route('/register', methods=['POST'])
-# def register():
-#     try:
-#         data = request.json
-#         username = data.get('username')
-#         email = data.get('email')
-#         password = data.get('password')
-
-#         if not username or not email or not password:
-#             return jsonify({'message': 'All fields are required'}), 400
-
-#         cur = mysql.connection.cursor()
-        
-#         # Check if the username or email already exists
-#         cur.execute("SELECT * FROM users WHERE username=%s OR email=%s", (username, email))
-#         existing_user = cur.fetchone()
-
-#         if existing_user:
-#             cur.close()
-#             return jsonify({'message': 'Username or email already exists'}), 400
-
-#         # Hash the password using pbkdf2:sha256
-#         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
-
-#         # Insert the new user into the database
-#         cur.execute("INSERT INTO users (username, email, password) VALUES (%s, %s, %s)", (username, email, hashed_password))
-#         mysql.connection.commit()
-#         cur.close()
-
-#         return jsonify({'message': 'User registered successfully'}), 201
-#     except Exception as e:
-#         print(f"Error: {e}")
-#         return jsonify({'message': 'Internal server error', 'error': str(e)}), 500
-    
-    
-# @app.route('/login', methods=['POST'])
-# def login():
-#     try:
-#         data = request.json
-#         email = data.get('email')
-#         password = data.get('password')
-
-#         if not email or not password:
-#             return jsonify({'message': 'Email and password are required'}), 400
-
-#         cur = mysql.connection.cursor()
-        
-#         # Fetch the user by email
-#         cur.execute("SELECT * FROM users WHERE email=%s", (email,))
-#         user = cur.fetchone()
-#         cur.close()
-
-#         if not user:
-#             return jsonify({'message': 'Invalid email or password'}), 401
-
-#         # Check if the provided password matches the hashed password in the database
-#         user_password_hash = user[3]  # Assuming the password is the third column
-#         if not check_password_hash(user_password_hash, password):
-#             return jsonify({'message': 'Invalid email or password'}), 401
-
-#         # Generate JWT token
-#         access_token = create_access_token(identity=email)
-
-#         return jsonify({'token': access_token}), 200
-#     except Exception as e:
-#         print(f"Error: {e}")
-#         return jsonify({'message': 'Internal server error', 'error': str(e)}), 500
-
-
-# if __name__ == '__main__':
-#     app.run(debug=True)

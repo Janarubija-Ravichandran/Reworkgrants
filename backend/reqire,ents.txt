@@ -1,0 +1,10 @@
+langchain-openai
+streamlit
+langchain_community
+langchain
+python-dotenv
+python-docx
+flask
+mysql-connector-python
+pdfplumber
+temp

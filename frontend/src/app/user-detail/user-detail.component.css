@@ -42,7 +42,7 @@ h2, h3 {
   margin-right: 10px;
 }
 
-.p-field input {
+.p-field p {
   flex: 2;
   padding: 10px;
   border: 1px solid #ccc;
@@ -58,6 +58,14 @@ h2, h3 {
 p-button {
   display: block;
   margin: 20px auto;
+}
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+}
+
+.p-field input.ng-touched.ng-invalid {
+  border-color: red;
 }
 
 @media (max-width: 768px) {

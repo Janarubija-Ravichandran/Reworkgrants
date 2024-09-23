@@ -1,29 +1,29 @@
 <div class="form-wrapper">
   <div class="card">
     <h2>User Idea Form</h2>
-    <form (ngSubmit)="onSubmit()">
+    <form  [formGroup]="ideaForm" (ngSubmit)="onSubmit()">
       <div class="p-fluid p-grid form-container">
         <!-- Project Name Field -->
-        <div class="p-field fn">
+        <!-- <div class="p-field fn">
           <label for="projectName">Project Name:</label>
           <input
             pInputText
             id="projectName"
-            [(ngModel)]="projectName"
+            formControlName="projectName"
             name="projectName"
             type="text"
             required
           />
-        </div>
+        </div> -->
 
         <!-- Project Summary Field -->
         <div class="p-field fn">
-          <label for="projectSummary">Project Summary:</label>
+          <label for="project-summary">Project Summary:</label>
           <input
             pInputText
-            id="projectSummary"
-            [(ngModel)]="projectSummary"
-            name="projectSummary"
+            id="project-summary"
+            formControlName="project_summary"
+             name="project-summary"
             type="text"
             required
           />
@@ -35,8 +35,7 @@
           <input
             pInputText
             id="budgetDetails"
-            [(ngModel)]="budgetDetails"
-            name="budgetDetails"
+            formControlName="budget_details"            name="budgetDetails"
             type="text"
             required
           />
@@ -48,8 +47,7 @@
           <input
             pInputText
             id="time"
-            [(ngModel)]="time"
-            name="time"
+            formControlName="timeline"            name="time"
             type="text"
             required
           />
@@ -61,7 +59,7 @@
           <input
             pInputText
             id="email"
-            [(ngModel)]="email"
+            [(ngModel)]="userEmail"
             name="email"
             type="email"
             readonly
@@ -80,3 +78,36 @@
     </form>
   </div>
 </div>
+<!-- <div class="idea-form-container">
+  <h2>{{ editMode ? 'Edit Idea' : 'Add Idea' }}</h2>
+
+  <form [formGroup]="ideaForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="project-summary">Project Summary:</label>
+      <textarea id="project-summary" formControlName="project_summary"></textarea>
+    </div>
+
+    <div>
+      <label for="budget-details">Budget Details:</label>
+      <input id="budget-details" type="text" formControlName="budget_details" />
+    </div>
+
+    <div>
+      <label for="timeline">Timeline:</label>
+      <input id="timeline" type="text" formControlName="timeline" />
+    </div>
+
+    <button type="submit" [disabled]="!ideaForm.valid">{{ editMode ? 'Update Idea' : 'Add Idea' }}</button>
+  </form>
+
+  <div *ngIf="ideas.length">
+    <h3>Your Ideas:</h3>
+    <ul>
+      <li *ngFor="let idea of ideas">
+        {{ idea.project_summary }} - {{ idea.budget_details }} - {{ idea.timeline }}
+        <button (click)="editIdea(idea)">Edit</button>
+      </li>
+    </ul>
+  </div>
+</div>
+ -->

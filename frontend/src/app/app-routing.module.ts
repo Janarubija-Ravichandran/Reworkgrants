@@ -11,6 +11,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserIdeaComponent } from './user-idea/user-idea.component';
 import { GrantsComponent } from './grants/grants.component';
 import { LayoutComponent } from './layout/layout.component';
+import { UserComponent } from './user/user.component';
 
 // const routes: Routes = [
 //   { path:'', redirectTo:'login', pathMatch:'full' },
@@ -40,7 +41,9 @@ const routes: Routes = [
       { path: 'header', component: HeaderComponent },
       { path: 'user-detail', component: UserDetailComponent },
       { path: 'user-idea', component: UserIdeaComponent },
-      { path: 'grants', component: GrantsComponent }
+      { path: 'grants', component: GrantsComponent },
+      { path: 'user', component: UserComponent }
+
     ]
   },
   { path: '**', component: UndefinedComponent }

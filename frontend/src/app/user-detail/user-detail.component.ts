@@ -1,45 +1,63 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from './../user-service.service'; // Adjust path as necessary
+import { MessageService } from 'primeng/api'; // For toast notifications
+export interface User {
+  id: number;
+  email: string;
+  name: string;
+  organizationName: string;
+  address: string;
+  city: string;
+  state: string;
+}
 
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.css']
 })
-export class UserDetailComponent {
-  firstName: string | null = '';
-  lastName: string | null = '';
-  email: string | null = '';
-  organization: string = '';
-  addressLine1: string = '';
-  addressLine2: string = '';
-  town: string = '';
-  city: string = '';
-  pin: string = '';
+export class UserDetailComponent implements OnInit {
+  user: User | null = null; // To store user details
+  userExists = false;
+  message: string | null = null;
 
-  constructor() {}
+  constructor(private userService: UserService, private messageService: MessageService) {}
 
-  ngOnInit() {
-    // Retrieve values from localStorage
-    this.firstName = localStorage.getItem('firstName') || '';
-    this.lastName = localStorage.getItem('lastName') || '';
-    this.email = localStorage.getItem('email') || '';
+  ngOnInit(): void {
+    const storedEmail = localStorage.getItem('email'); // Get email from localStorage
+    if (storedEmail) {
+      this.getUserDetails(storedEmail);
+    }
   }
 
-  onSubmit() {
-    // Handle form submission logic here
-    console.log('Form submitted!');
-    console.log({
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
-      organization: this.organization,
-      address: {
-        addressLine1: this.addressLine1,
-        addressLine2: this.addressLine2,
-        town: this.town,
-        city: this.city,
-        pin: this.pin
+  getUserDetails(email: string): void {
+    this.userService.getUserDetails(email).subscribe(
+      (response) => {
+        console.log('Response from server:', response); // Log the entire response
+        if (response.users && response.users.length > 0) {
+          const userArray = response.users[0]; // Get the first user array
+          // Map to User interface
+          this.user = {
+            id: userArray[0],
+            email: userArray[1],
+            name: userArray[2],
+            organizationName: userArray[3],
+            address: userArray[4],
+            city: userArray[5],
+            state: userArray[6],
+          };
+          this.userExists = true;
+        } else {
+          this.userExists = false;
+          this.message = 'No user details found.';
+          this.messageService.add({ severity: 'warn', summary: 'Warning', detail: this.message });
+        }
+      },
+      (error) => {
+        console.error('Error fetching user details:', error);
+        this.message = 'Error fetching user details.';
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: this.message });
       }
-    });
+    );
   }
 }

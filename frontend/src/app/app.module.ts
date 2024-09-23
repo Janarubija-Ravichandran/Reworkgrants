@@ -35,6 +35,7 @@ import { GrantsComponent } from './grants/grants.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { LayoutComponent } from './layout/layout.component';
 import { FileUploadModule } from 'primeng/fileupload';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { FileUploadModule } from 'primeng/fileupload';
     UserIdeaComponent,
     GrantsComponent,
     LayoutComponent,
+    UserComponent,
   ],
   imports: [
     FileUploadModule,
