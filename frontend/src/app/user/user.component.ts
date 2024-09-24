@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from './../user-service.service';
 import { MessageService } from 'primeng/api';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -20,7 +20,7 @@ export class UserComponent implements OnInit {
   userExists = false;
   message: string | null = null;
 
-  constructor(private userService: UserService, private messageService: MessageService) {}
+  constructor(private userService: UserService, private messageService: MessageService,private router:Router) {}
 
   ngOnInit(): void {
     const storedEmail = localStorage.getItem('email');
@@ -66,6 +66,7 @@ export class UserComponent implements OnInit {
         () => {
           this.message = 'User details added successfully!';
           this.userExists = true;
+          this.router.navigate(['/user-detail']);
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'User details added successfully!' });
         },
         (error) => {
@@ -74,5 +75,9 @@ export class UserComponent implements OnInit {
         }
       );
     }
-  }
+  } addDetails(): void {
+
+
+}
+
 }

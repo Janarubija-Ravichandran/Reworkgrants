@@ -1,46 +1,94 @@
-.user-details-form {
-  max-width: 600px;
-  margin: auto;
+/* Full-screen container */
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%; /* Ensure full viewport height */
+  background-image: url("/assets/regis.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding: 20px; /* Add padding to avoid overlap with header/footer */
+  box-sizing: border-box; /* Include padding in the height calculation */
+}
+
+.card {
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.user-details-form h2 {
-  text-align: center;
-}
-
-.user-details-form label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.user-details-form input {
   width: 100%;
-  padding: 8px;
+  max-width: 700px;
+  background-color: rgba(255, 255, 255, 0.55);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Ensure padding is included in the total width */
+}
+
+h2, h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.p-field {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 15px;
+  align-items: center;
+}
+
+.p-field label {
+  flex: 1;
+  text-align: left;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.p-field p {
+  flex: 2;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-}
-
-.user-details-form button {
   width: 100%;
+}
+.p-field input {
+  flex: 2;
   padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  cursor: pointer;
+  width: 100%;
 }
 
-.user-details-form button:disabled {
-  background-color: #ccc;
+.fn {
+  display: flex;
+  align-items: center;
 }
 
-.message {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 16px;
-  color: green;
+p-button {
+  display: block;
+  margin: 20px auto;
+}
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+}
+
+.p-field input.ng-touched.ng-invalid {
+  border-color: red;
+}
+
+@media (max-width: 768px) {
+  .p-field {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .p-field label {
+    margin-bottom: 5px;
+    text-align: left;
+  }
+
+  /* Adjust card width and padding for small screens */
+  .card {
+    padding: 10px;
+    width: 100%;
+  }
 }

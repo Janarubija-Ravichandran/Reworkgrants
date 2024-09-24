@@ -1,98 +1,60 @@
-
-    <div class="form-wrapper">
-      <div class="card">
-        <h2>User Details</h2>
-        <form  *ngIf="userExists; else noUserTemplate" class="user-details">
-          <div class="p-fluid p-grid form-container">
-            <!-- Project Name Field -->
-            <!-- <div class="p-field fn">
-              <label for="projectName">Project Name:</label>
-              <input
-                pInputText
-                id="projectName"
-                formControlName="projectName"
-                name="projectName"
-                type="text"
-                required
-              />
-            </div> -->
-
-            <!-- Project Summary Field -->
-            <div class="p-field fn">
-              <label for="project-summary">Email:</label>
-              <p>{{user?.email}}</p>
-            </div>
-
-            <!-- Budget Details Field -->
-            <div class="p-field fn">
-              <label for="budgetDetails">Name:</label>
-              <p>{{user?.name}}</p>
-            </div>
-
-            <!-- Time Field -->
-            <div class="p-field fn">
-              <label for="time">OrganizationName:</label>
-              <p> {{ user?.organizationName }}</p>
-            </div>
-
-            <!-- Email Field (Fetched from localStorage) -->
-            <div class="p-field fn">
-              <label for="email">Address:</label>
-             <p>{{ user?.address }}</p>
-            </div>
-            <div class="p-field fn">
-              <label for="email">City:</label>
-             <p>{{ user?.city }}</p>
-            </div>
-            <div class="p-field fn">
-              <label for="email">State:</label>
-             <p>{{ user?.state }}</p>
-            </div>
-
-            <!-- Submit Button -->
-            <div class="p-col-12">
-              <p-button
-                label="Submit"
-                type="submit"
-                class="p-button-rounded p-button-success"
-              ></p-button>
-            </div>
-          </div>
-        </form>
-        <ng-template #noUserTemplate>
-          <div *ngIf="message">{{ message }}</div>
-        </ng-template>  </div>
+<div class="form-wrapper">
+  <div class="card">
+    <h2>User Details</h2>
+    <form
+      *ngIf="userExists; else noUserTemplate"
+      [formGroup]="userForm"
+      class="user-details"
+    >
+      <div class="p-fluid p-grid form-container">
+        <div class="p-field fn">
+          <label for="email">Email:</label>
+          <p>{{ user?.email }}</p>
+        </div>
+        <div class="p-field fn">
+          <label for="name">Name:</label>
+          <input pInputText id="name" formControlName="name" />
+        </div>
+        <div class="p-field fn">
+          <label for="organization_name">Organization Name:</label>
+          <input
+            pInputText
+            id="organization_name"
+            formControlName="organization_name"
+          />
+        </div>
+        <div class="p-field fn">
+          <label for="address">Address:</label>
+          <input pInputText id="address" formControlName="address" />
+        </div>
+        <div class="p-field fn">
+          <label for="city">City:</label>
+          <input pInputText id="city" formControlName="city" />
+        </div>
+        <div class="p-field fn">
+          <label for="state">State:</label>
+          <input pInputText id="state" formControlName="state" />
+        </div>
+        <div class="p-col-12">
+          <p-button
+            *ngIf="!editMode"
+            label="Edit"
+            (click)="toggleEditMode()"
+          ></p-button>
+          <p-button
+            *ngIf="editMode"
+            label="Save"
+            (click)="saveUserDetails()"
+          ></p-button>
+        </div>
       </div>
-    <!-- <div class="idea-form-container">
-      <h2>{{ editMode ? 'Edit Idea' : 'Add Idea' }}</h2>
-
-      <form [formGroup]="ideaForm" (ngSubmit)="onSubmit()">
-        <div>
-          <label for="project-summary">Project Summary:</label>
-          <textarea id="project-summary" formControlName="project_summary"></textarea>
-        </div>
-
-        <div>
-          <label for="budget-details">Budget Details:</label>
-          <input id="budget-details" type="text" formControlName="budget_details" />
-        </div>
-
-        <div>
-          <label for="timeline">Timeline:</label>
-          <input id="timeline" type="text" formControlName="timeline" />
-        </div>
-
-        <button type="submit" [disabled]="!ideaForm.valid">{{ editMode ? 'Update Idea' : 'Add Idea' }}</button>
-      </form>
-
-      <div *ngIf="ideas.length">
-        <h3>Your Ideas:</h3>
-        <ul>
-          <li *ngFor="let idea of ideas">
-            {{ idea.project_summary }} - {{ idea.budget_details }} - {{ idea.timeline }}
-            <button (click)="editIdea(idea)">Edit</button>
-          </li>
-        </ul>
+    </form>
+    <ng-template #noUserTemplate>
+      <div *ngIf="message">
+        {{ message }}
+        <p-button label="Add user-details" (click)="addDetails()"></p-button>
       </div>
-    </div>
-     -->
+    </ng-template>
+  </div>
+  <p-toast></p-toast>
+</div>

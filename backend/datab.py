@@ -123,7 +123,7 @@ def modify_user_details( email, **kwargs):
         return
 
     try:
-        query = "UPDATE user_details SET "
+        query = "UPDATE grant_proposal_db.user_details SET "
         params = []
         for key, value in kwargs.items():
             query += f"{key} = %s, "
@@ -135,6 +135,8 @@ def modify_user_details( email, **kwargs):
         cursor.execute(query, params)
         conn.commit()
         print("User details updated successfully.")
+        print(query)  # Check the constructed SQL query
+        print(params)  # Check the parameters used in the query
 
     except mysql.connector.Error as err:
         print(f"Error: {err}")

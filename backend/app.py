@@ -321,8 +321,10 @@ def modify_idea_route():
     modify_idea(idea_id, **updated_fields)
     return jsonify({"message": "Idea updated successfully!"}), 200
 if __name__ == '__main__':
+    
     create_database_if_not_exists()
     app.run(debug=True)
+
 
 
 

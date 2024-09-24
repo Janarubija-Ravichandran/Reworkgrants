@@ -19,9 +19,9 @@ export class UserService {
   addUserDetails(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/add_user`, user);
   }
-
-  // Update user details
+//update user details
   updateUserDetails(user: any): Observable<any> {
+    console.log("User data being sent:", user);  // Debug: Log the data being sent
     return this.http.put(`${this.apiUrl}/modify_user`, user);
   }
 }

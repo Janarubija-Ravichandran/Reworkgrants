@@ -49,6 +49,13 @@ h2, h3 {
   border-radius: 4px;
   width: 100%;
 }
+.p-field input {
+  flex: 2;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
 
 .fn {
   display: flex;
